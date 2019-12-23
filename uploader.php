@@ -91,7 +91,7 @@ if (count($arrSql) > 0) {
     }$conn->close();
 }
 
-if (count($arrSql) > 0 || count($arrSqlUserMachine) > 0) {
+if (count($arrSql) > 0 ) {
     $fp = fopen('last_sync_at.txt', 'w');
     $timezone  = 7;
     $date = gmdate("#m/d/Y h:i:s a#", time() + 3600*($timezone+date("I")));
