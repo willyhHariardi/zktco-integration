@@ -9,8 +9,9 @@ if (!file_exists($database_path)) {
     die("Could not find database file.");
 }
 
+odbc_close_all();
 try {
-    $db = odbc_connect("Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq=$database_path", "admin", "");
+   $db = odbc_connect("Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq=$database_path", "admin", "");
 } catch (PDOException $e) {
     echo $e->getMessage();
 }
@@ -23,10 +24,7 @@ if(filesize('last_sync_at.txt') > 0) {
 
 $rs = odbc_exec($db, $sql);
 if(!odbc_num_rows($rs)) {
-    $fp = fopen('last_sync_at.txt', 'w');
-    $date = date('#m/d/Y h:i:s a#');
-    fwrite($fp, $date);
-    fclose($file);
+   
     echo "<script>window.close();</script>";
     die('no data') ;
 }
@@ -48,6 +46,7 @@ if (mysqli_connect_errno())
 }
 
 try {
+
     $db = odbc_connect("Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq=$database_path", "admin", "");
 } catch (PDOException $e) {
     echo $e->getMessage();
