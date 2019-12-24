@@ -9,7 +9,6 @@ if (!file_exists($database_path)) {
     die("Could not find database file.");
 }
 
-odbc_close_all();
 try {
    $db = odbc_connect("Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq=$database_path", "admin", "");
 } catch (PDOException $e) {
@@ -100,5 +99,6 @@ if (count($arrSql) > 0 ) {
     echo "No data";
 }
 
+odbc_close_all();
 echo "<script>window.close();</script>";
 ?>
